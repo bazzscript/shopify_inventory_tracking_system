@@ -1,0 +1,31 @@
+{
+  "name": "shopify_inventory_tracking_system",
+  "version": "1.0.0",
+  "description": "Inventory tracking web application for a logistics company",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "set APP_ENV=development && npm run start",
+    "staging": "set APP_ENV=staging && npm run start",
+    "prod": "set APP_ENV=production && npm run start",
+    "start": "nodemon ./src/server.js"
+  },
+  "author": "Bezaleel Nwabia",
+  "license": "ISC",
+  "dependencies": {
+    "bcrypt": "^5.0.1",
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.0",
+    "express": "^4.18.0",
+    "express-rate-limit": "^6.4.0",
+    "helmet": "^5.0.2",
+    "http-status-codes": "^2.2.0",
+    "mongoose": "^6.3.1",
+    "morgan": "^1.10.0",
+    "rate-limiter": "^0.2.0",
+    "xss-clean": "^0.1.1"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.15"
+  }
+}
