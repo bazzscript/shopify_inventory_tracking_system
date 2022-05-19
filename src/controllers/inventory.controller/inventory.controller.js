@@ -232,7 +232,7 @@ Inventory.getAnItem = async (req, res) => {
         // Confirm the item exists in the db
         const item = await InventoryModel.findOne({
             itemSku: item_sku
-        });
+        }).populate('itemWarehouse');
         if (!item) {
             return res.status(StatusCodes.BAD_REQUEST).json({
                 status: "error",
