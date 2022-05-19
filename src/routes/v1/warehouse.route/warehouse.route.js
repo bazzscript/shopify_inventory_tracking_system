@@ -12,9 +12,9 @@ router.post("/add-warehouse", warehouseController.addNewWarehouse);
 router.get("/get-all-warehouses", warehouseController.getAllWarehouses);
 
 // Update a warehouse
-router.put("/update-warehouse/:warehouse_id", warehouseController.updateWarehouse);
+router.put("/update-warehouse/:warehouse_num", warehouseController.updateWarehouse);
 
 // Delete a warehouse
-router.delete("/delete-warehouse/:warehouse_id", warehouseController.deleteWarehouse);
+router.delete("/delete-warehouse/:warehouse_num", warehouseController.deleteWarehouse);
 
 module.exports = router;

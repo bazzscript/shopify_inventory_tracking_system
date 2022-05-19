@@ -12,7 +12,8 @@ app.get("/", async function (req, res, next) {
     status: "success",
     statusCode: StatusCodes.OK,
     message: `Welcome to the ${process.env.APP_NAME} inventory tracking API. Running in ${process.env.APP_ENV}`,
-    more_info: "visit /api/v1 to access version 1 of our API"
+    more_info: "visit /api/v1 to access version 1 of our API",
+    documentation: "https://documenter.getpostman.com/view/15534491/UyxnEQdM"
   });
 });
 

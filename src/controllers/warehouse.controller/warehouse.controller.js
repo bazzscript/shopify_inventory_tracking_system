@@ -2,6 +2,7 @@ const {
   StatusCodes
 } = require('http-status-codes');
 const WarehouseModel = require('../../models/warehouse.model');
+const custom_uid = require('../../utils/utils');
 
 const Warehouse = {}
 
@@ -38,6 +39,7 @@ Warehouse.addNewWarehouse = async (req, res) => {
     }
 
     const warehouse = await new WarehouseModel({
+      warehouseNumber: custom_uid.warehouse_number(),
       warehouseName: warehouseName,
       warehouseAddress: warehouseAddress
     });
@@ -86,15 +88,15 @@ Warehouse.getAllWarehouses = async (req, res) => {
 // Update a warehouse
 Warehouse.updateWarehouse = async (req, res) => {
   try {
-    const warehouse_id = await req.params.warehouse_id;
-    if (!warehouse_id) {
+    const warehouse_num = await req.params.warehouse_num;
+    if (!warehouse_num) {
       return res.status(StatusCodes.BAD_REQUEST).json({
         status: "error",
         status_code: StatusCodes.BAD_REQUEST,
-        message: "the warehouse id is undefined"
+        message: "the warehouse number is undefined"
       });
     }
-    
+
     const body = await req.body;
     if (!body) {
       return res.status(StatusCodes.BAD_REQUEST).json({
@@ -105,19 +107,16 @@ Warehouse.updateWarehouse = async (req, res) => {
     }
 
     // Confirm the warehouse exists in the db
-    
-    try {
-      await WarehouseModel.findOne({
-        _id: warehouse_id
-      });
-    } catch (error) {
-      return res.status(StatusCodes.BAD_REQUEST).json({
+    const warehouse = await WarehouseModel.findOne({
+      warehouseNumber: warehouse_num
+    });
+    if (!warehouse) {
+      return res.status(StatusCodes.NOT_FOUND).json({
         status: "error",
-        status_code: StatusCodes.BAD_REQUEST,
-        message: "the given warehouse id does not exist"
+        status_code: StatusCodes.NOT_FOUND,
+        message: "the given warehouse number does not exist"
       });
     }
-    console.log('am hit o');
 
 
 
@@ -131,7 +130,7 @@ Warehouse.updateWarehouse = async (req, res) => {
         warehouseAddress: warehouseAddress
       };
       const updatedWarehouse = await WarehouseModel.findOneAndUpdate({
-        _id: warehouse_id
+        warehouseNumber: warehouse_num
       }, data, {
         new: true
       });
@@ -148,7 +147,7 @@ Warehouse.updateWarehouse = async (req, res) => {
       status: "success",
       status_code: StatusCodes.OK,
       message: "No changes made to warehouse, as no fields were provided",
-     
+
     });
 
   } catch (error) {
@@ -176,7 +175,7 @@ Warehouse.deleteWarehouse = async (req, res) => {
 
     // Confirm the warehouse exists in the db
     try {
-     const warehouse =  await WarehouseModel.findOne({
+      const warehouse = await WarehouseModel.findOne({
         _id: warehouse_id
       });
 
