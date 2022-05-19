@@ -10,7 +10,7 @@ module.exports = (app) => {
   app.use(helmet());
   app.use(xss());
   app.use(morgan("dev"));
-  app.set('trust proxy', 1);
+  // app.set('trust proxy', 1);
   app.use(
     rateLimiter({
       windowMs: 15 * 60 * 1000, // 15 minutes
@@ -22,7 +22,7 @@ module.exports = (app) => {
   app.use(express.urlencoded({
     extended: false
   }));
-  app.use("/uploads", express.static("/uploads"));
+
 
   return app;
 };
