@@ -11,8 +11,8 @@ app.get("/", async function (req, res, next) {
   res.status(StatusCodes.OK).json({
     status: "success",
     statusCode: StatusCodes.OK,
-    message: `Welcome to the ${process.env.APP_NAME} ${process.env.APP_ENV} inventory tracking API`,
-    more_info: "visit /api/v1 for the version 1 of our API"
+    message: `Welcome to the ${process.env.APP_NAME} inventory tracking API. Running in ${process.env.APP_ENV}`,
+    more_info: "visit /api/v1 to access version 1 of our API"
   });
 });
 
