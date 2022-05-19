@@ -12,7 +12,7 @@ router.get("/", async function (req, res, next) {
     res.status(StatusCodes.OK).json({
       status: "success",
       statusCode: StatusCodes.OK,
-      message: `Welcome to the ${process.env.APP_NAME} ${process.env.APP_ENV} "V1" inventory tracking API`,
+      message: `Welcome to the ${process.env.APP_NAME} ${process.env.APP_ENV}inventory tracking API v1`,
       data: "empty"
     });
   });

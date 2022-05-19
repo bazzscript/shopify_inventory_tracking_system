@@ -6,6 +6,16 @@ const {StatusCodes} = require('http-status-codes');
 require("./middlewares/pre-route.middleware")(app);
 
 // API Version 1
+
+app.get("/", async function (req, res, next) {
+  res.status(StatusCodes.OK).json({
+    status: "success",
+    statusCode: StatusCodes.OK,
+    message: `Welcome to the ${process.env.APP_NAME} ${process.env.APP_ENV} inventory tracking API`,
+    more_info: "visit /api/v1 for the version 1 of our API"
+  });
+});
+
 app.use("/api", require("./routes/versions"));
 
 // PING
@@ -17,7 +27,6 @@ app.all("*", (req, res) => {
     status: "error",
     status_code: StatusCodes.NOT_FOUND,
     message: "Can't find " + req.originalUrl + " on this server",
-    data: "empty"
   });
 });
 
