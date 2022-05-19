@@ -217,6 +217,44 @@ Inventory.updateItem = async (req, res) => {
     }
 }
 
+// Get a particular item
+Inventory.getAnItem = async (req, res) => {
+    try {
+        const item_sku = req.params.item_sku;
+        if (!item_sku) {
+            return res.status(StatusCodes.BAD_REQUEST).json({
+                status: "error",
+                status_code: StatusCodes.BAD_REQUEST,
+                message: "the item sku is undefined"
+            });
+        }
+
+        // Confirm the item exists in the db
+        const item = await InventoryModel.findOne({
+            itemSku: item_sku
+        });
+        if (!item) {
+            return res.status(StatusCodes.BAD_REQUEST).json({
+                status: "error",
+                status_code: StatusCodes.BAD_REQUEST,
+                message: "the item sku is invalid"
+            });
+        }
+
+        return res.status(StatusCodes.OK).json({
+            status: "success",
+            status_code: StatusCodes.OK,
+            message: "Item retrieved successfully",
+            data: item
+        });
+    } catch (error) {
+        return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
+            status: "error",
+            status_code: StatusCodes.INTERNAL_SERVER_ERROR,
+            message: error.message
+        });
+    }
+}
 
 // Delete an item in the inventory
 Inventory.deleteItem = async (req, res) => {

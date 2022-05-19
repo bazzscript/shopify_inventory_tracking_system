@@ -14,6 +14,9 @@ router.get("/get-all-items", inventoryController.getAllItems);
 // Update an item in the inventory
 router.put("/update-item/:item_sku", inventoryController.updateItem);
 
+// Get a single item in the inventory
+router.get("/get-item/:item_sku", inventoryController.getAnItem);
+
 // Delete an item in the inventory
 router.delete("/delete-item/:item_sku", inventoryController.deleteItem);
 
