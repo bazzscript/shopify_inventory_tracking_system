@@ -106,7 +106,7 @@ Inventory.addItemToInventory = async (req, res) => {
 // Get all items in the inventory
 Inventory.getAllItems = async (req, res) => {
     try {
-        const items = await InventoryModel.find();
+        const items = await InventoryModel.find().populate('itemWarehouse');
         return res.status(StatusCodes.OK).json({
             status: "success",
             status_code: StatusCodes.OK,
