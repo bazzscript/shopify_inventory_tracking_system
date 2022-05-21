@@ -39,18 +39,18 @@ Inventory.addItemToInventory = async (req, res) => {
                 message: "the item description is empty"
             });
         }
-        if (!itemQuantity || itemQuantity < 0) {
+        if (!itemQuantity || itemQuantity < 1) {
             return res.status(StatusCodes.BAD_REQUEST).json({
                 status: "error",
                 status_code: StatusCodes.BAD_REQUEST,
-                message: "the item quantity is empty or 0"
+                message: "the item quantity is empty or less than 1"
             });
         }
-        if (!itemPrice || itemPrice < 0) {
+        if (!itemPrice || itemPrice < 1) {
             return res.status(StatusCodes.BAD_REQUEST).json({
                 status: "error",
                 status_code: StatusCodes.BAD_REQUEST,
-                message: "the item price is empty or 0"
+                message: "the item price is empty or less than 1"
             });
         }
         if (!itemWarehouse) {
